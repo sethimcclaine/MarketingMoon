@@ -19,9 +19,6 @@
 		<div class="navbar">
 			<hr />
 			<a href="/">Home</a> <a href="">My Account</a>
-			<a href="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.2/jquery.min.js">jquery.min.js</a>
-  			<a href="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js">underscore-min.js</a>
-  			<a href="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js">backbone-min.js</a>
 
 
 			<hr />
@@ -30,9 +27,9 @@
   	</div>
 
 	<!-- include scripts-->
-  	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
-  	<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js" type="text/javascript"></script>
-  	<script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js"></script>
+  	<script src="js/jquery.min.js" type="text/javascript"></script><!--http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.2/jquery.min.js-->
+  	<script src="js/underscore-min.js" type="text/javascript"></script><!-- http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js-->
+  	<script src="js/backbone-min.js"></script><!--http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js-->
 
 	<!-- Templates -->
   	<script type="text/template" id="home-template">
@@ -109,7 +106,7 @@
 		<form class="edit-promotion-form">
 			<legend><%= promotion ? 'Edit' : 'New' %> Promotion</legend>
 			<label> Select type</lable>
-			<input name="firstname" type="text" value="<%= user ? user.get('firstname') : '' %>">
+			<input name="selecttype" type="text" value="<%= promotion ? pormotion.get('firstname') : '' %>">
 			<button type="submit" class="btn"><%= promotion ? 'Update' : 'Create' %></button>
 			<% if(promotion) { %>
 				<input type="hidden" name="id" value="<%= promotion.id %>" />
@@ -351,7 +348,7 @@
 	router.on('route:home', function() {
       		homeView.render();
     	})
-  	router.on('route:edit', function(id) {
+  	router.on('route:promotion', function(id) {
       		promotionView.render({id: id});
     	})
 
