@@ -33,6 +33,7 @@
 
 	<!-- Templates -->
   	<script type="text/template" id="home-template">
+	<div class="home">
     		<div class="logo">
       			<div class="moon">
         			<div class="cresent"></div>
@@ -52,6 +53,7 @@
 			<div class="location-text">Location: </div>
 			<input type="text"></input>	
 		</div>
+	</div>
   	</script>
 	
   	<script type="text/template" id="promotion-count-template">
@@ -103,9 +105,77 @@
   </script>
   -->
 	<script type="text/template" id="edit-promotion-template">
+	<div class="edit-promotion">
 		<form class="edit-promotion-form">
-			<legend><%= promotion ? 'Edit' : 'New' %> Promotion</legend>
-			<label> Select type</lable>
+			<legend><%= promotion ? 'Edit' : 'New' %> Promotion <%= promotion ? '' : 'Setup' %></legend>
+			<table>
+				<tr>
+					<td>
+						<table>
+							<tr>
+								<td><label>Select Type:</label></td>
+								<td><input type="text"></input></td>
+								<td><label>Service Value:</label></td>
+								<td><input type="text"></input></td>
+							</tr>
+							<tr>
+								<td ><label>Service Title:</label></td>
+								<td colspan="3"><input type="text"></input></td>
+							</tr>
+							<tr>
+								<td><label>Address:</label></td>
+								<td colspan="3"><input type="text"></input></td>
+							</tr>
+							<tr>
+								<td><label>Contact Email:</label></td>
+								<td colspan="3"><input type="text"></input></td>
+							</tr>
+							<tr>
+								<td><label>Website:</label></td>
+								<td colspan="3"><input type="text"></input></td>
+							</tr>
+						</table>
+					</td>
+					<td>
+						<table>
+							<tr>
+								<td><label>Start Date:</label></td>
+								<td><input type="text"></input></td>
+							</tr>
+							<tr>
+								<td><label>End Date:</label></td>
+								<td><input type="text"></input></td>
+							</tr>
+							<tr><td>&nbsp;</td></tr>
+							<tr>
+								<td><label>Business Phone:</label></td>
+								<td><input type="text"></input></td>
+							</tr>
+							<tr>
+								<td><label>Contact Name:</label></td>
+								<td><input type="text"></input></td>
+							</tr>
+							<tr>
+								<td><label>Contact Phone:</label></td>
+								<td><input type="text"></input></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>Product Description</label>
+						<textarea></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>Product Terms &amp; Conditions</label>
+						<textarea></textarea>
+					</td>
+				</tr>
+			</table>
+			<label> Select type</label>
 			<input name="selecttype" type="text" value="<%= promotion ? pormotion.get('firstname') : '' %>">
 			<button type="submit" class="btn"><%= promotion ? 'Update' : 'Create' %></button>
 			<% if(promotion) { %>
@@ -113,6 +183,7 @@
 				<button data-promotion-id="<%= pormotion.id %>" class="btn btn-danger delete">Delete</button>
 			<% }; %>
 		</form>
+	</div>
   	</script>
 <!--
   <script type="text/template" id="edit-user-template">

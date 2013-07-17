@@ -4,20 +4,10 @@
 @grey: grey;
 @lgrey: lightgrey;
 @green: green; //#4D926F;
-
-//Homepage
-.promotions-count {
-	position: relative;
-	top: 1.5em;
-	float: right;
-	font-size: 1.7em;
-	color: @blue;
-	font-weight: 200;
-	.count {
-		color: @green;
-		font-size: 1.25em;
-		font-weight: bold;
-	}
+//Globals
+input, textarea {
+	border-radius: .5em;
+	border: solid @grey .1em;
 }
 .navbar {
 	a {
@@ -35,7 +25,7 @@
 		position: absolute; 
 		border-radius:2em;
 		height: 5em;
-	      	width: 5em;
+		width: 5em;
 		.cresent{
 		      background-color: white;
 		      position: absolute; 
@@ -67,95 +57,121 @@
 		}
 	}
 }
-.description {
-	float: left;
-	width: 75%;
-	font-weight: 200;
-}
-.location {
-	width: 100%;
-	text-align: right;
-	.location-text {
-		float: right;
+//Homepage
+	.promotions-count {
 		position: relative;
-		right: 13.25em;
-		padding: .25em 0 .23em .5em;
-		border-radius: .5em 0 0 .5em;
-		border: @lgrey solid .1em;
-		border-right: none;
-		background-color: white;
-		font-size: 1.25em;
+		top: 1.5em;
+		float: right;
+		font-size: 1.7em;
+		color: @blue;
 		font-weight: 200;
-		color: @grey;
-	}
-	input {
-		margin-right: -4.75em;
-		border-radius: 0 .5em .5em 0;
-		&:focus {
-			border: @lgrey solid .1em;
-		}
-	}
-}
-.promotion {
-	float: left;
-	width: 30%;
-	height: 23em;
-	padding: 0 1.6%;
-	.promo-img{
-		img {
-			border-radius: .5em .5em 0 0;
-		}
-
-		button {
-			float: right;
-			border: @lgrey solid .1em;
-			width: 2em;
-			height: 2em;
-			color: @grey;
-			background-color: white;
-			position: relative;
-			top: 11.5em;
-			left: -.75em;
-			&.like-btn {
-				border-radius: .25em  0 0 .25em ;
-			}
-			&.close-btn {
-				border-radius: 0 .25em  .25em 0;
-			}
-		}
-	}
-	.promo-desc {
-		padding: .5em;
-		border: @lgrey solid .1em;
-		border-top: none;
-		border-radius: 0 0 .5em .5em;
-		.promo-title {
-			color: @blue;
-			font-weight: bold;
-			padding-top: .5em;
-			height: 3.25em;
-		}
-		.promo-location {
-			color: @grey;
-		}
-		.promo-price {
-			float: right;
+		.count {
+			color: @green;
 			font-size: 1.25em;
-			margin-top: -.5em;
-			.origional {
-				color: @grey;
-				text-decoration: line-through;
-			}
-			.markdown {
-				color: @green;
-			}
+			font-weight: bold;
 		}
-		.promo-end {
-			margin-top: .5em;
-			color: @blue;
+	}
+	
+
+	.description {
+		float: left;
+		width: 75%;
+		font-weight: 200;
+	}
+	.location {
+		width: 100%;
+		text-align: right;
+		.location-text {
+			float: right;
+			position: relative;
+			right: 13.25em;
+			padding: .25em 0 .23em .5em;
+			border-radius: .5em 0 0 .5em;
+			border: @lgrey solid .1em;
+			border-right: none;
+			background-color: white;
 			font-size: 1.25em;
 			font-weight: 200;
+			color: @grey;
 		}
+		input {
+			margin-right: -4.75em;
+			border-radius: 0 .5em .5em 0;
+			&:focus {
+				border: @lgrey solid .1em;
+			}
+		}
+	}
+	.promotion {
+		float: left;
+		width: 30%;
+		height: 23em;
+		padding: 0 1.6%;
+		.promo-img{
+			img {
+				border-radius: .5em .5em 0 0;
+			}
 
+			button {
+				float: right;
+				border: @lgrey solid .1em;
+				width: 2em;
+				height: 2em;
+				color: @grey;
+				background-color: white;
+				position: relative;
+				top: 11.5em;
+				left: -.75em;
+				&.like-btn {
+					border-radius: .25em  0 0 .25em ;
+				}
+				&.close-btn {
+					border-radius: 0 .25em  .25em 0;
+				}
+			}
+		}
+		.promo-desc {
+			padding: .5em;
+			border: @lgrey solid .1em;
+			border-top: none;
+			border-radius: 0 0 .5em .5em;
+			.promo-title {
+				color: @blue;
+				font-weight: bold;
+				padding-top: .5em;
+				height: 3.25em;
+			}
+			.promo-location {
+				color: @grey;
+			}
+			.promo-price {
+				float: right;
+				font-size: 1.25em;
+				margin-top: -.5em;
+				.origional {
+					color: @grey;
+					text-decoration: line-through;
+				}
+				.markdown {
+					color: @green;
+				}
+			}
+			.promo-end {
+				margin-top: .5em;
+				color: @blue;
+				font-size: 1.25em;
+				font-weight: 200;
+			}
+
+		}
+	}
+//Promotions
+.edit-promotion {
+	border: solid @lgrey .25em;
+	border-radius: 2em;
+	padding: 2em;
+	legend { 
+		text-align: center;
+		color: @green;
 	}
 }
