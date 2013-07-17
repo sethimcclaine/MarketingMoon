@@ -1,0 +1,356 @@
+<!doctype html>
+<!--https://github.com/thomasdavis/backbonetutorials/blob/gh-pages/videos/beginner/index.html-->
+<html lang="en">
+<head>
+  	<meta charset="utf-8">
+  	<title>MoonMarketing.com</title>
+  	<!-- Boot Strap -->
+  	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.1.1/css/bootstrap.min.css">
+
+  	<!-- less stylesheet -->
+	<link rel="stylesheet/less" type="text/css" href="less/styles.less" />
+  	<!--less compile script -->
+	<script src="js/less.js" type="text/javascript"></script>
+</head>
+<body>
+
+  	<div class="container">
+		<div class="pre-navbar"></div>
+		<div class="navbar">
+			<hr />
+			<a href="/">Home</a> <a href="">My Account</a>
+			<hr />
+		</div>
+		<div class="page"></div>
+  	</div>
+
+	<!-- include scripts-->
+  	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
+  	<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js" type="text/javascript"></script>
+  	<script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js"></script>
+
+	<!-- Templates -->
+  	<script type="text/template" id="home-template">
+    		<div class="logo">
+      			<div class="moon">
+        			<div class="cresent"></div>
+      			</div>
+      			<div class="marketing-moon">
+				<span class="marketing-text"><span class="big-m">M</span>arketing</span> <span class="moon-text"><span class="big-m">M</span>oon<span>
+			</div>
+		</div>
+    		<div class="description">
+    			Retailers and Services providers need to get their products in the hands of people. They need feedback in the form of reviews. These products
+			and services are provided to you at heavy cost, below cost and in many cases free. These products and services are provided to you as Prizes! 
+			<br/>
+			<br/>
+			Choose a prize and let us know you are interested.
+    		</div>
+		<div class="location">
+			<div class="location-text">Location: </div>
+			<input type="text"></input>	
+		</div>
+  	</script>
+	
+  	<script type="text/template" id="promotion-count-template">
+		<div class="promotions-count"> Promotions: <span class="count"><%= htmlEncode(promoCount) %></span></div>
+	</script>
+  	<script type="text/template" id="promotion-list-template">
+        	<% _.each(promotions, function(promotion) { %>
+			<div class="promotion">
+				<div class="promo-img">
+					<button class="close-btn">X</button>
+					<button class="like-btn">&lt;3</button>
+					<img src="<%= htmlEncode(promotion.image) %>">
+				</div>
+				<div class="promo-desc">
+					<div class="promo-title"><%= htmlEncode(promotion.description) %></div>
+					<div class="promo-company"><%= htmlEncode(promotion.company) %></div>
+					<div class="promo-location"><%= htmlEncode(promotion.location) %></div>
+					<div class="promo-price">
+						<span class="origional">$<%= htmlEncode(promotion.price) %></span>
+						<span class="markdown">$<%= htmlEncode(promotion.markdown) %></span>
+					</div>
+					<div class="promo-end">Ends: <%= htmlEncode(promotion.hours) %> Hours</div>
+				</div>
+			</div>
+		<% }); %>
+	</script>
+
+  <script type="text/template" id="user-list-template">
+    <a href="#/new" class="btn btn-primary">New</a>
+    <hr />
+    <table class="table striped">
+      <thead>
+        <tr>
+          <th>First Name</th><th>Last Name</th><th>Age</th><th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% _.each(users, function(user) { %>
+          <tr>
+            <td><%= htmlEncode(user.get('firstname')) %></td>
+            <td><%= htmlEncode(user.get('lastname')) %></td>
+            <td><%= htmlEncode(user.get('age')) %></td>
+            <td><a class="btn" href="#/edit/<%= user.id %>">Edit</a></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </script>
+
+  <script type="text/template" id="edit-promotion-template">
+  	<form class="edit-promotion-form">
+		<legend><%= promotion ? 'Edit' : 'New' %> Promotion</legend>
+		<label> Select type</lable>
+		<input name="firstname" type="text" value="<%= user ? user.get('firstname') : '' %>">
+       		<button type="submit" class="btn"><%= promotion ? 'Update' : 'Create' %></button>
+		<% if(promotion) { %>
+        		<input type="hidden" name="id" value="<%= promotion.id %>" />
+       			<button data-promotion-id="<%= pormotion.id %>" class="btn btn-danger delete">Delete</button>
+       		<% }; %>
+	</form>
+  </script>
+  <script type="text/template" id="edit-user-template">
+    <form class="edit-user-form">
+      <legend><%= user ? 'Edit' : 'New' %> User</legend>
+        <label>First Name</label>
+        <input name="firstname" type="text" value="<%= user ? user.get('firstname') : '' %>">
+        <label>Last Name</label>
+        <input name="lastname" type="text" value="<%= user ? user.get('lastname') : '' %>">
+        <label>Age</label>
+        <input name="age" type="text" value="<%= user ? user.get('age') : '' %>">
+        <hr />
+       <button type="submit" class="btn"><%= user ? 'Update' : 'Create' %></button>
+       <% if(user) { %>
+        <input type="hidden" name="id" value="<%= user.id %>" />
+       <button data-user-id="<%= user.id %>" class="btn btn-danger delete">Delete</button>
+       <% }; %>
+    </form>
+  </script>
+
+  <script>
+    function htmlEncode(value){
+      return $('<div/>').text(value).html();
+    }
+    $.fn.serializeObject = function() {
+      var o = {};
+      var a = this.serializeArray();
+      $.each(a, function() {
+          if (o[this.name] !== undefined) {
+              if (!o[this.name].push) {
+                  o[this.name] = [o[this.name]];
+              }
+              o[this.name].push(this.value || '');
+          } else {
+              o[this.name] = this.value || '';
+          }
+      });
+      return o;
+    };
+
+    $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
+      options.url = 'http://backbonejs-beginner.herokuapp.com' + options.url;
+    });
+
+    var Users = Backbone.Collection.extend({
+      url: '/users'
+    });
+
+    var User = Backbone.Model.extend({
+      urlRoot: '/users'
+    });
+
+    var UserListView = Backbone.View.extend({
+      el: '.page',
+      render: function () {
+        var that = this;
+        var users = new Users();
+        users.fetch({
+          success: function (users) {
+            var template = _.template($('#user-list-template').html(), {users: users.models});
+            that.$el.html(template);
+          }
+        })
+      }
+    });
+    var userListView = new UserListView();
+////////
+//HOME//
+////////
+	var HomeView = Backbone.View.extend({
+      		el: '.page',
+      		render: function () {
+        		var self = this;
+			//var promoCount = promotion.models.length;
+			var promotions = [
+					{
+						image: 'https://img.grouponcdn.com/deal/4PPA1AkKhAzaRbnnAZoG/Zv-440x267/v1/t300x182.jpg',
+						description: 'Up to 79% off at Darque Tan',
+						company: 'Darque Tan',
+						location: 'Multiple Locations',
+						hours: 18,
+						price: 68,
+						markdown: 25 
+					},
+					{
+						image: 'https://img.grouponcdn.com/deal/4PPA1AkKhAzaRbnnAZoG/Zv-440x267/v1/t300x182.jpg',
+						description: 'Up to 56% off botox or juvederm injections',
+						company: 'The Natural Place',
+						location: 'North Centeral Westminster',
+						hours: 48,
+						price: 200,
+						markdown: 99 
+					},
+					{
+						image: 'https://img.grouponcdn.com/deal/4PPA1AkKhAzaRbnnAZoG/Zv-440x267/v1/t300x182.jpg',
+						description: 'Up to 51% off a 10-lap race at Action Karting',
+						company: 'Action Karting',
+						location: 'Northeast Jefferson',
+						hours: 2,
+						price:  80,
+						markdown: 39 
+					},
+					{
+						image: 'https://img.grouponcdn.com/deal/4PPA1AkKhAzaRbnnAZoG/Zv-440x267/v1/t300x182.jpg',
+						description: 'Up to 79% off at Darque Tan',
+						company: 'Darque Tan',
+						location: 'Multiple Locations',
+						hours: 18,
+						price: 68,
+						markdown: 25 
+					},
+					{
+						image: 'https://img.grouponcdn.com/deal/4PPA1AkKhAzaRbnnAZoG/Zv-440x267/v1/t300x182.jpg',
+						description: 'Up to 56% off botox or juvederm injections',
+						company: 'The Natural Place',
+						location: 'North Centeral Westminster',
+						hours: 48,
+						price: 200,
+						markdown: 99 
+					},
+					{
+						image: 'https://img.grouponcdn.com/deal/4PPA1AkKhAzaRbnnAZoG/Zv-440x267/v1/t300x182.jpg',
+						description: 'Up to 51% off a 10-lap race at Action Karting',
+						company: 'Action Karting',
+						location: 'Northeast Jefferson',
+						hours: 2,
+						price:  80,
+						markdown: 39 
+					},
+				];
+			var promoCount = promotions.length;
+        		var promotionCount = _.template($('#promotion-count-template').html(), {promoCount: promoCount});
+			//self.$('.pre-navbar').html(promotionCount);
+			$('.pre-navbar').html(promotionCount);
+        		var home = _.template($('#home-template').html());
+        		self.$el.html(home);
+        		var promotionList = _.template($('#promotion-list-template').html(), {promotions: promotions});
+        		self.$el.append(promotionList);
+      		}
+    	});
+	var homeView = new HomeView();
+
+	var PromotionView = Backbone.View.extend({
+		el: '.page',
+      		events: {
+        		'submit .edit-user-form': 'savePromotion',
+        		'click .delete': 'deletePromotion'
+      		},
+		savePromotion: function(e) {
+		},
+		deletePromotion: function(e) {
+		},
+		render: function(options) {
+			var self = this;
+        		if(options.id) {
+          			self.promotion = new User({id: options.id});
+          			self.promotion.fetch({
+            				success: function (user) {    
+						var template = _.template($('#edit-promotion-template').html(), {promotion: promotion});
+						self.$el.html(template);
+            				}
+          			})
+        		} else {
+          			var template = _.template($('#edit-promotion-template').html(), {promotion: null});
+          			self.$el.html(template);
+        		}
+      		}
+    	});
+    	var promotionView = new PromotionView();
+/*
+    var UserEditView = Backbone.View.extend({
+      el: '.page',
+      events: {
+        'submit .edit-user-form': 'saveUser',
+        'click .delete': 'deleteUser'
+      },
+      saveUser: function (ev) {
+        var userDetails = $(ev.currentTarget).serializeObject();
+        var user = new User();
+        user.save(userDetails, {
+          success: function (user) {
+            router.navigate('', {trigger:true});
+          }
+        });
+        return false;
+      },
+      deleteUser: function (ev) {
+        this.user.destroy({
+          success: function () {
+            console.log('destroyed');
+            router.navigate('', {trigger:true});
+          }
+        })
+      },
+      render: function (options) {
+        var that = this;
+        if(options.id) {
+          that.user = new User({id: options.id});
+          that.user.fetch({
+            success: function (user) {    
+              var template = _.template($('#edit-user-template').html(), {user: user});
+              that.$el.html(template);
+            }
+          })
+        } else {
+          var template = _.template($('#edit-user-template').html(), {user: null});
+          that.$el.html(template);
+        }
+      }
+    });
+    var userEditView = new UserEditView();
+*/
+    var Router = Backbone.Router.extend({
+        routes: {
+          "": "home", 
+          //"edit/:id": "edit",
+          //"new": "edit",
+          "edit/:id": "promotion",
+          "new": "promotion",
+        }
+    });
+
+    var router = new Router;
+    /*
+    router.on('route:home', function() {
+      // render user list
+      userListView.render();
+    })
+    router.on('route:edit', function(id) {
+      userEditView.render({id: id});
+    })
+    */
+	router.on('route:home', function() {
+      		homeView.render();
+    	})
+  	router.on('route:edit', function(id) {
+      		promotionView.render({id: id});
+    	})
+
+    Backbone.history.start();
+  </script>
+
+
+</body>
+</html> 
