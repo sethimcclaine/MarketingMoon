@@ -31,215 +31,13 @@
   	<script src="js/underscore-min.js" type="text/javascript"></script><!-- http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js-->
   	<script src="js/backbone-min.js"></script><!--http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js-->
 
-	<!-- Templates -->
-  	<script type="text/template" id="home-template">
-	<div class="home">
-    		<div class="logo">
-      			<div class="moon">
-        			<div class="cresent"></div>
-      			</div>
-      			<div class="marketing-moon">
-				<span class="marketing-text"><span class="big-m">M</span>arketing</span> <span class="moon-text"><span class="big-m">M</span>oon<span>
-			</div>
-		</div>
-    		<div class="description">
-    			Retailers and Services providers need to get their products in the hands of people. They need feedback in the form of reviews. These products
-			and services are provided to you at heavy cost, below cost and in many cases free. These products and services are provided to you as Prizes! 
-			<br/>
-			<br/>
-			Choose a prize and let us know you are interested.
-    		</div>
-		<div class="location">
-			<div class="location-text">Location: </div>
-			<input type="text"></input>	
-		</div>
-	</div>
-  	</script>
-	
-  	<script type="text/template" id="promotion-count-template">
-		<div class="promotions-count"> Promotions: <span class="count"><%= htmlEncode(promoCount) %></span></div>
-	</script>
-
-  	<script type="text/template" id="promotion-list-template">
-        	<% _.each(promotions, function(promotion) { %>
-			<div class="promotion">
-				<div class="promo-img">
-					<button class="close-btn">X</button>
-					<button class="like-btn">&lt;3</button>
-					<img src="<%= htmlEncode(promotion.image) %>">
-				</div>
-				<div class="promo-desc">
-					<div class="promo-title"><%= htmlEncode(promotion.description) %></div>
-					<div class="promo-company"><%= htmlEncode(promotion.company) %></div>
-					<div class="promo-location"><%= htmlEncode(promotion.location) %></div>
-					<div class="promo-price">
-						<span class="origional">$<%= htmlEncode(promotion.price) %></span>
-						<span class="markdown">$<%= htmlEncode(promotion.markdown) %></span>
-					</div>
-					<div class="promo-end">Ends: <%= htmlEncode(promotion.hours) %> Hours</div>
-				</div>
-			</div>
-		<% }); %>
-	</script>
-<script type="text/template" id="edit-promotion-template">
-	<div class="edit-promotion">
-		<form class="edit-promotion-form">
-			<legend><%= promotion ? 'Edit' : 'New' %> Promotion <%= promotion ? '' : 'Setup' %></legend>
-			<table>
-				<tr>
-					<td>
-						<table>
-							<tr>
-								<td><label>Select Type:</label></td>
-								<td><input type="text"></input></td>
-								<td><label>Service Value:</label></td>
-								<td><input type="text"></input></td>
-							</tr>
-							<tr>
-								<td ><label>Service Title:</label></td>
-								<td colspan="3"><input type="text"></input></td>
-							</tr>
-							<tr>
-								<td><label>Address:</label></td>
-								<td colspan="3"><input type="text"></input></td>
-							</tr>
-							<tr>
-								<td><label>Contact Email:</label></td>
-								<td colspan="3"><input type="text"></input></td>
-							</tr>
-							<tr>
-								<td><label>Website:</label></td>
-								<td colspan="3"><input type="text"></input></td>
-							</tr>
-						</table>
-					</td>
-					<td>
-						<table>
-							<tr>
-								<td><label>Start Date:</label></td>
-								<td><input type="text"></input></td>
-							</tr>
-							<tr>
-								<td><label>End Date:</label></td>
-								<td><input type="text"></input></td>
-							</tr>
-							<tr><td>&nbsp;</td></tr>
-							<tr>
-								<td><label>Business Phone:</label></td>
-								<td><input type="text"></input></td>
-							</tr>
-							<tr>
-								<td><label>Contact Name:</label></td>
-								<td><input type="text"></input></td>
-							</tr>
-							<tr>
-								<td><label>Contact Phone:</label></td>
-								<td><input type="text"></input></td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label>Product Description</label>
-						<textarea></textarea>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label>Product Terms &amp; Conditions</label>
-						<textarea></textarea>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						How many top winners can there be? <input type="text"></input>
-					</td>
-					<td>
-						Select Compentition Type: <input type="text"></input>
-					</td>
-				</tr>
-			</table>
-			<p>
-				Select the options that your winners will perform for you. Each option is worth one point. Each $15 increment of value in your Price is worth one point. Based on your Service value you have: <span> points</span>
-			</p>
-			<table>
-				<thead>
-					<tr>
-						<th colspan="2">Select your options</th>
-						<th>Enter infomation on enabled options</th>
-					</tr>
-				</thead>
-				<tr>
-					<td class="checkbox"></td>
-					<td>Like My Facebook Page</td>
-					<td><input type="text"></input>
-				</tr>
-				<tr>
-					<td class="checkbox"></td>
-					<td>Share Me on Facebook</td>
-					<td><input type="text"></input>
-				</tr>
-				<tr>
-					<td class="checkbox"></td>
-					<td>Follow Me on Twitter</td>
-					<td><input type="text"></input>
-				</tr>
-				<tr>
-					<td class="checkbox"></td>
-					<td>Add to Circles on Google+</td>
-					<td><input type="text"></input>
-				</tr>
-				<tr>
-					<td class="checkbox"></td>
-					<td>+1 Us on Google Local</td>
-					<td><input type="text"></input>
-				</tr>
-				<tr>
-					<td class="checkbox"></td>
-					<td>Post Review on Google Local</td>
-					<td><input type="text"></input>
-				</tr>
-				<tr>
-					<td class="checkbox"></td>
-					<td>Post Review on Yelp</td>
-					<td><input type="text"></input>
-				</tr>
-				<tr>
-					<td class="checkbox"></td>
-					<td>Post Review on YP (YellowPages)</td>
-					<td><input type="text"></input>
-				</tr>
-				<tr>
-					<td class="checkbox"></td>
-					<td>Pin This on Pintrest</td>
-					<td><input type="text"></input>
-				</tr>
-				<tr>
-					<td class="checkbox"></td>
-					<td>Post Review on Mapquest</td>
-					<td><input type="text"></input>
-				</tr>
-				<tr>
-					<td class="checkbox"></td>
-					<td>Checkin on Foursquare</td>
-					<td><input type="text"></input>
-				</tr> 
-				<tr>
-					<td class="checkbox"></td>
-					<td>Like My YouTube Video</td>
-					<td><input type="text"></input>
-				</tr>  
-				<tr>
-					<td class="checkbox"></td>
-					<td>Subscribe to My YouTube Channel</td>
-					<td><input type="text"></input>
-				</tr> 
-			</table>
-			<button type="button">Next</button>
-		</form>
-	</div>
-</script>
+	<!-- Templates 
+	@todo -remove
+  	<script type="text/template" id="template-home" src="templates/home.html"></script>
+  	<script type="text/template" id="template-promotion-count" src="templates/count.html"> </script>
+  	<script type="text/template" id="template-promotion-list" src="templates/promolist.html"> </script>
+	<script type="text/template" id="template-promotion-edit" src="templates/edit.html"> </script>
+	-->
 <script>
     function htmlEncode(value){
       return $('<div/>').text(value).html();
@@ -259,20 +57,19 @@
       });
       return o;
     };
-
     $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
-      options.url = 'http://backbonejs-beginner.herokuapp.com' + options.url;
+      //options.url = 'http://backbonejs-beginner.herokuapp.com' + options.url;
     });
-
 ////////
 //HOME//
 ////////
 	var HomeView = Backbone.View.extend({
       		el: '.page',
+		template: _.template('template/home.html'),
       		render: function () {
         		var self = this;
 			//var promoCount = promotion.models.length;
-			var promotions = [
+			self.promotions = [
 					{
 						image: 'https://img.grouponcdn.com/deal/4PPA1AkKhAzaRbnnAZoG/Zv-440x267/v1/t300x182.jpg',
 						description: 'Up to 79% off at Darque Tan',
@@ -328,17 +125,20 @@
 						markdown: 39 
 					},
 				];
-			var promoCount = promotions.length;
-        		var promotionCount = _.template($('#promotion-count-template').html(), {promoCount: promoCount});
-			//self.$('.pre-navbar').html(promotionCount);
-			$('.pre-navbar').html(promotionCount);
-        		var home = _.template($('#home-template').html());
-        		self.$el.html(home);
-        		var promotionList = _.template($('#promotion-list-template').html(), {promotions: promotions});
-        		self.$el.append(promotionList);
+
+			$.get('templates/count.html', function(template) {
+        			$('.pre-navbar').html( _.template(template, {promoCount: self.promotions.length}));
+			});
+
+			$.get('templates/home.html',function(template) {
+        			self.$el.html(_.template(template));
+			});
+			$.get('templates/promolist.html',function(template) {
+        			self.$el.append(_.template(template, {promotions: self.promotions}));
+			});
+
       		}
     	});
-	var homeView = new HomeView();
 
 	var PromotionView = Backbone.View.extend({
 		el: '.page',
@@ -353,54 +153,49 @@
 		render: function(options) {
 			var self = this;
         		if(options.id) {
+				/* @todo
           			self.promotion = new User({id: options.id});
           			self.promotion.fetch({
-            				success: function (user) {    
-						var template = _.template($('#edit-promotion-template').html(), {promotion: promotion});
-						self.$el.html(template);
+            				success: function (promotion) {    
+						$.get('templates/edit.html',function(template) {
+							self.$el.html(_.template(template, {promotion: promotion}));
+						});
             				}
           			})
+				*/
         		} else {
-          			var template = _.template($('#edit-promotion-template').html(), {promotion: null});
-          			self.$el.html(template);
+				$.get('templates/edit.html',function(template) {
+					self.$el.html(_.template(template, {promotion: null}));
+				});
         		}
       		}
     	});
-    	var promotionView = new PromotionView();
 
 	var PromotionlistView = Backbone.View.extend({
 	});
+
+	/********************/
+	/*****Definitions****/
+	/********************/
+	var homeView = new HomeView();
+    	var promotionView = new PromotionView();
     	var promotionlistView = new PromotionlistView();
+
+	/********************/
+	/*******ROUTER*******/
+	/********************/
     	var Router = Backbone.Router.extend({
         	routes: {
           		"": "home", 
-          		//"edit/:id": "edit",
-          		//"new": "edit",
           		"edit/:id": "promotion",
           		"new": "promotion",
           		"active": "promotionlist",
         	}
     	});
-
     	var router = new Router;
-    	/*
-    	router.on('route:home', function() {
-      		// render user list
-      		userListView.render();
-    	})
-    	router.on('route:edit', function(id) {
-      		userEditView.render({id: id});
-    	})
-    	*/
-	router.on('route:home', function() {
-      		homeView.render();
-    	})
-  	router.on('route:promotion', function(id) {
-      		promotionView.render({id: id});
-    	})
-  	router.on('route:promotionlist', function(id) {
-      		promotionlistView.render();
-    	})
+	router.on('route:home', 		function() { homeView.render(); })
+  	router.on('route:promotion', 		function(id) { promotionView.render({id: id}); })
+  	router.on('route:promotionlist', 	function(id) { promotionlistView.render(); })
 
     	Backbone.history.start();
 </script>

@@ -1,0 +1,157 @@
+<div class="edit-promotion">
+	<form class="edit-promotion-form">
+		<legend><%= promotion ? 'Edit' : 'New' %> Promotion <%= promotion ? '' : 'Setup' %></legend>
+		<table>
+			<tr>
+				<td>
+					<table>
+						<tr>
+							<td><label>Select Type:</label></td>
+							<td><input type="text"></input></td>
+							<td><label>Service Value:</label></td>
+							<td><input type="text"></input></td>
+						</tr>
+						<tr>
+							<td ><label>Service Title:</label></td>
+							<td colspan="3"><input type="text"></input></td>
+						</tr>
+						<tr>
+							<td><label>Address:</label></td>
+							<td colspan="3"><input type="text"></input></td>
+						</tr>
+						<tr>
+							<td><label>Contact Email:</label></td>
+							<td colspan="3"><input type="text"></input></td>
+						</tr>
+						<tr>
+							<td><label>Website:</label></td>
+							<td colspan="3"><input type="text"></input></td>
+						</tr>
+					</table>
+				</td>
+				<td>
+					<table>
+						<tr>
+							<td><label>Start Date:</label></td>
+							<td><input type="text"></input></td>
+						</tr>
+						<tr>
+							<td><label>End Date:</label></td>
+							<td><input type="text"></input></td>
+						</tr>
+						<tr><td>&nbsp;</td></tr>
+						<tr>
+							<td><label>Business Phone:</label></td>
+							<td><input type="text"></input></td>
+						</tr>
+						<tr>
+							<td><label>Contact Name:</label></td>
+							<td><input type="text"></input></td>
+						</tr>
+						<tr>
+							<td><label>Contact Phone:</label></td>
+							<td><input type="text"></input></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>Product Description</label>
+					<textarea></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>Product Terms &amp; Conditions</label>
+					<textarea></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					How many top winners can there be? <input type="text"></input>
+				</td>
+				<td>
+					Select Compentition Type: <input type="text"></input>
+				</td>
+			</tr>
+		</table>
+		<p>
+			Select the options that your winners will perform for you. Each option is worth one point. Each $15 increment of value in your Price is worth one point. Based on your Service value you have: <span> points</span>
+		</p>
+		<table>
+			<thead>
+				<tr>
+					<th colspan="2">Select your options</th>
+					<th>Enter infomation on enabled options</th>
+				</tr>
+			</thead>
+			<tr>
+				<td class="checkbox"></td>
+				<td>Like My Facebook Page</td>
+				<td><input type="text"></input>
+			</tr>
+			<tr>
+				<td class="checkbox"></td>
+				<td>Share Me on Facebook</td>
+				<td><input type="text"></input>
+			</tr>
+			<tr>
+				<td class="checkbox"></td>
+				<td>Follow Me on Twitter</td>
+				<td><input type="text"></input>
+			</tr>
+			<tr>
+				<td class="checkbox"></td>
+				<td>Add to Circles on Google+</td>
+				<td><input type="text"></input>
+			</tr>
+			<tr>
+				<td class="checkbox"></td>
+				<td>+1 Us on Google Local</td>
+				<td><input type="text"></input>
+			</tr>
+			<tr>
+				<td class="checkbox"></td>
+				<td>Post Review on Google Local</td>
+				<td><input type="text"></input>
+			</tr>
+			<tr>
+				<td class="checkbox"></td>
+				<td>Post Review on Yelp</td>
+				<td><input type="text"></input>
+			</tr>
+			<tr>
+				<td class="checkbox"></td>
+				<td>Post Review on YP (YellowPages)</td>
+				<td><input type="text"></input>
+			</tr>
+			<tr>
+				<td class="checkbox"></td>
+				<td>Pin This on Pintrest</td>
+				<td><input type="text"></input>
+			</tr>
+			<tr>
+				<td class="checkbox"></td>
+				<td>Post Review on Mapquest</td>
+				<td><input type="text"></input>
+			</tr>
+			<tr>
+				<td class="checkbox"></td>
+				<td>Checkin on Foursquare</td>
+				<td><input type="text"></input>
+			</tr> 
+			<tr>
+				<td class="checkbox"></td>
+				<td>Like My YouTube Video</td>
+				<td><input type="text"></input>
+			</tr>  
+			<tr>
+				<td class="checkbox"></td>
+				<td>Subscribe to My YouTube Channel</td>
+				<td><input type="text"></input>
+			</tr> 
+		</table>
+		<button type="button">Next</button>
+	</form>
+</div>
