@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
   	<meta charset="utf-8">
-  	<title>MoonMarketing.com</title>
+  	<title>MarketingMoon.com</title>
   	<!-- Boot Strap -->
   	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.1.1/css/bootstrap.min.css">
 
@@ -367,6 +367,10 @@
       		}
     	});
     	var promotionView = new PromotionView();
+
+	var PromotionlistView = Backbone.View.extend({
+	});
+    	var promotionlistView = new PromotionlistView();
     	var Router = Backbone.Router.extend({
         	routes: {
           		"": "home", 
@@ -374,6 +378,7 @@
           		//"new": "edit",
           		"edit/:id": "promotion",
           		"new": "promotion",
+          		"active": "promotionlist",
         	}
     	});
 
@@ -392,6 +397,9 @@
     	})
   	router.on('route:promotion', function(id) {
       		promotionView.render({id: id});
+    	})
+  	router.on('route:promotionlist', function(id) {
+      		promotionlistView.render();
     	})
 
     	Backbone.history.start();
