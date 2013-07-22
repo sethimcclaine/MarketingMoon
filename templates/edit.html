@@ -1,4 +1,4 @@
-<div class="edit-promotion">
+<div id="editPage">
 	<form class="edit-promotion-form">
 		<legend><%= promotion ? 'Edit' : 'New' %> Promotion <%= promotion ? '' : 'Setup' %></legend>
 		<table>
@@ -7,25 +7,30 @@
 					<table>
 						<tr>
 							<td><label>Select Type:</label></td>
-							<td><input type="text"></input></td>
+							<td>
+								<select id="type">
+									<option value="product">Product</option>
+									<option value="servcie">Service</option>
+								</select>
+							</td>
 							<td><label>Service Value:</label></td>
-							<td><input type="text"></input></td>
+							<td><input type="text" id="value"></input></td>
 						</tr>
 						<tr>
 							<td ><label>Service Title:</label></td>
-							<td colspan="3"><input type="text"></input></td>
+							<td colspan="3"><input id="title" type="text"></input></td>
 						</tr>
 						<tr>
 							<td><label>Address:</label></td>
-							<td colspan="3"><input type="text"></input></td>
+							<td colspan="3"><input id="address" type="text"></input></td>
 						</tr>
 						<tr>
 							<td><label>Contact Email:</label></td>
-							<td colspan="3"><input type="text"></input></td>
+							<td colspan="3"><input id="email" type="text"></input></td>
 						</tr>
 						<tr>
 							<td><label>Website:</label></td>
-							<td colspan="3"><input type="text"></input></td>
+							<td colspan="3"><input id="website" type="text"></input></td>
 						</tr>
 					</table>
 				</td>
@@ -33,51 +38,58 @@
 					<table>
 						<tr>
 							<td><label>Start Date:</label></td>
-							<td><input type="text"></input></td>
+							<td><input type="text" id="start"></input></td>
 						</tr>
 						<tr>
 							<td><label>End Date:</label></td>
-							<td><input type="text"></input></td>
+							<td><input type="text" id="end"></input></td>
 						</tr>
 						<tr><td>&nbsp;</td></tr>
 						<tr>
 							<td><label>Business Phone:</label></td>
-							<td><input type="text"></input></td>
+							<td><input type="text" id="buisnessphone"></input></td>
 						</tr>
 						<tr>
 							<td><label>Contact Name:</label></td>
-							<td><input type="text"></input></td>
+							<td><input type="text" id="contact"></input></td>
 						</tr>
 						<tr>
 							<td><label>Contact Phone:</label></td>
-							<td><input type="text"></input></td>
+							<td><input type="text" id="phone"></input></td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<td colspan="2">
 					<label>Product Description</label>
-					<textarea></textarea>
+					<textarea id="description"></textarea>
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<td colspan="2">
 					<label>Product Terms &amp; Conditions</label>
-					<textarea></textarea>
+					<textarea id="terms"></textarea>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					How many top winners can there be? <input type="text"></input>
+					How many top winners can there be? <input type="text" id="winners"></input>
 				</td>
 				<td>
-					Select Compentition Type: <input type="text"></input>
+					Select Compentition Type: 
+					<select id="social">
+						<option value="facebook">Facebook</option>
+						<option value="twitter">Twitter</option>
+						<option value="linkedin">LinkedIn</option>
+						<option value="klout">Klout</option>
+						<option value="youtube">YouTube</option>
+					</select>
 				</td>
 			</tr>
 		</table>
-		<p>
-			Select the options that your winners will perform for you. Each option is worth one point. Each $15 increment of value in your Price is worth one point. Based on your Service value you have: <span> points</span>
+		<p class="point-disclosure">
+			Select the options that your winners will perform for you. Each option is worth one point. Each $15 increment of value in your Price is worth one point. Based on your Service value you have: <span id="point-count"> points</span>
 		</p>
 		<table>
 			<thead>
@@ -87,71 +99,71 @@
 				</tr>
 			</thead>
 			<tr>
-				<td class="checkbox"></td>
+				<td> <div class="option" id="fb-like-select"></div></td>
 				<td>Like My Facebook Page</td>
-				<td><input type="text"></input>
+				<td><input type="text" id="fb-like-text" class="option-text"></input>
 			</tr>
 			<tr>
-				<td class="checkbox"></td>
+				<td> <div class="option" id="fb-share-select"></div></td>
 				<td>Share Me on Facebook</td>
-				<td><input type="text"></input>
+				<td><input type="text" id="fb-share-text" class="option-text"></input>
 			</tr>
 			<tr>
-				<td class="checkbox"></td>
+				<td> <div class="option" id="tw-follow-select"></div></td>
 				<td>Follow Me on Twitter</td>
-				<td><input type="text"></input>
+				<td><input type="text" id="tw-follow-text" class="option-text"></input>
 			</tr>
 			<tr>
-				<td class="checkbox"></td>
+				<td> <div class="option" id="google-circle-select"></div></td>
 				<td>Add to Circles on Google+</td>
-				<td><input type="text"></input>
+				<td><input type="text" id="google-circle-text" class="option-text"></input>
 			</tr>
 			<tr>
-				<td class="checkbox"></td>
+				<td> <div class="option" id="google-one-select"></div></td>
 				<td>+1 Us on Google Local</td>
-				<td><input type="text"></input>
+				<td><input type="text" id="google-one-text" class="option-text"></input>
 			</tr>
 			<tr>
-				<td class="checkbox"></td>
+				<td> <div class="option" id="google-review-select"></div></td>
 				<td>Post Review on Google Local</td>
-				<td><input type="text"></input>
+				<td><input type="text" id="google-review-text" class="option-text"></input>
 			</tr>
 			<tr>
-				<td class="checkbox"></td>
+				<td> <div class="option" id="yelp-review-select"></div></td>
 				<td>Post Review on Yelp</td>
-				<td><input type="text"></input>
+				<td><input type="text" id="yelp-review-text" class="option-text"></input>
 			</tr>
 			<tr>
-				<td class="checkbox"></td>
+				<td> <div class="option" id="yp-review-select"></div></td>
 				<td>Post Review on YP (YellowPages)</td>
-				<td><input type="text"></input>
+				<td><input type="text" id="yp-review-text" class="option-text"></input>
 			</tr>
 			<tr>
-				<td class="checkbox"></td>
+				<td> <div class="option" id="pin-pin-select"></div></td>
 				<td>Pin This on Pintrest</td>
-				<td><input type="text"></input>
+				<td><input type="text" id="pin-pin-text" class="option-text"></input>
 			</tr>
 			<tr>
-				<td class="checkbox"></td>
+				<td> <div class="option" id="mq-review-select"></div></td>
 				<td>Post Review on Mapquest</td>
-				<td><input type="text"></input>
+				<td><input type="text" id="mq-review-text" class="option-text"></input>
 			</tr>
 			<tr>
-				<td class="checkbox"></td>
+				<td><div class="option" id="fs-checkin-select"></div></td>
 				<td>Checkin on Foursquare</td>
-				<td><input type="text"></input>
+				<td><input type="text" id="fs-checkin-text" class="option-text"></input>
 			</tr> 
 			<tr>
-				<td class="checkbox"></td>
+				<td> <div class="option" id="youtube-like-select"></div></td>
 				<td>Like My YouTube Video</td>
-				<td><input type="text"></input>
+				<td><input type="text" id="youtube-like-text" class="option-text"></input>
 			</tr>  
 			<tr>
-				<td class="checkbox"></td>
+				<td> <div class="option" id="youtube-subscribe-select"></div></td>
 				<td>Subscribe to My YouTube Channel</td>
-				<td><input type="text"></input>
+				<td><input type="text" id="youtube-subscribe-text" class="option-text"></input>
 			</tr> 
 		</table>
-		<button type="button">Next</button>
+		<button type="button" id="next" class="btn-green">Next</button>
 	</form>
 </div>

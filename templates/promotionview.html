@@ -1,4 +1,5 @@
 <div id="viewPage">
+	<% _.each(promotions, function(promotion) { %>
 		<div class="active promotion">
 			<div class="active info">
 				<div class="time"><span class="font-green">Time Remaining:</span> <span class="font-blue"><%= htmlEncode(promotion.hours) %></span></div>	
@@ -14,4 +15,5 @@
 				<img src=<%= htmlEncode(promotion.image) %>>
 			</div>
 		</div>
+	<% }); %>
 </div>

@@ -107,14 +107,56 @@
 
 		}
 	}
-//Promotions
-.edit-promotion {
+//editPage
+#editPage {
 	border: solid @lgrey .25em;
 	border-radius: 2em;
 	padding: 2em;
 	legend { 
 		text-align: center;
 		color: @green;
+	}
+	label {
+		min-width: 8em;
+	}
+	#type, #value, #winners, #social {
+		width: 8em;
+		margin-right: 2em;
+	}
+	#title, #address, #email, #website {
+		width: 26.35em;
+	}
+	#description, #terms {
+		width: 60.75em;
+	}
+	.point-disclosure {
+		margin-top: 2em;
+		margin-bottom: 2em;
+		color: @green;
+		#point-count {
+			color: @red;
+			font-weight: bold;
+		}
+	}
+	th {
+		color: @green;
+		font-weight: 200;
+		text-align: left;
+		font-size: 1.25em;
+	}
+	.option {
+		border: solid @grey 1px;
+		border-radius: .5em;
+		height: 1.25em;
+		width: 1.25em;
+	}
+	.option-text {
+		width: 44em;
+		float: right;
+	}
+	#next {
+		float: right;
+		margin-right: .75em;
 	}
 }
 //listPage, viewPage
