@@ -278,8 +278,8 @@
 					price: 200,
 					markdown: 99 
 				},
-				33: {
-					id: 33, 
+				333: {
+					id: 333, 
 					image: 'https://img.grouponcdn.com/deal/4PPA1AkKhAzaRbnnAZoG/Zv-440x267/v1/t300x182.jpg',
 					network: 'Twitter',
 					title: 'Up to 51% off a 10-lap race at Action Karting',
@@ -294,8 +294,7 @@
 			self.promotion = self.promotions[options.id];
 	
 			$.get('templates/promotionview.html',function(template) {
-			debugger;
-				self.$el.html(_.template(template, {promotions: self.promotion}));
+				self.$el.html(_.template(template, {promotion: self.promotion}));
 			});
 		}
 	});
