@@ -4,13 +4,17 @@
 <head>
   	<meta charset="utf-8">
   	<title>MarketingMoon.com</title>
+
   	<!-- Boot Strap -->
   	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.1.1/css/bootstrap.min.css">
 
   	<!-- less stylesheet -->
-	<link rel="stylesheet/less" type="text/css" href="less/styles.less" />
+	<link rel="stylesheet/less" type="text/css" href="less/global.less" />
+	<link rel="stylesheet/less" type="text/css" href="less/pages.less" />
+
   	<!--less compile script -->
 	<script src="js/less.js" type="text/javascript"></script>
+
 </head>
 <body>
 
@@ -18,7 +22,7 @@
 		<div class="pre-navbar"></div>
 		<div class="navbar">
 			<hr />
-			<a href="/">Home</a> <a href="">My Account</a>
+			<a href="">Home</a> <a href="#list">My Account</a>
 
 
 			<hr />
@@ -31,17 +35,12 @@
   	<script src="js/underscore-min.js" type="text/javascript"></script><!-- http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js-->
   	<script src="js/backbone-min.js"></script><!--http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js-->
 
-	<!-- Templates 
-	@todo -remove
-  	<script type="text/template" id="template-home" src="templates/home.html"></script>
-  	<script type="text/template" id="template-promotion-count" src="templates/count.html"> </script>
-  	<script type="text/template" id="template-promotion-list" src="templates/promolist.html"> </script>
-	<script type="text/template" id="template-promotion-edit" src="templates/edit.html"> </script>
-	-->
 <script>
+
     function htmlEncode(value){
       return $('<div/>').text(value).html();
     }
+
     $.fn.serializeObject = function() {
       var o = {};
       var a = this.serializeArray();
@@ -57,6 +56,7 @@
       });
       return o;
     };
+
     $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
       //options.url = 'http://backbonejs-beginner.herokuapp.com' + options.url;
     });
@@ -71,8 +71,9 @@
 			//var promoCount = promotion.models.length;
 			self.promotions = [
 					{
+						id: 1,
 						image: 'https://img.grouponcdn.com/deal/4PPA1AkKhAzaRbnnAZoG/Zv-440x267/v1/t300x182.jpg',
-						description: 'Up to 79% off at Darque Tan',
+						title: 'Up to 79% off at Darque Tan',
 						company: 'Darque Tan',
 						location: 'Multiple Locations',
 						hours: 18,
@@ -80,8 +81,9 @@
 						markdown: 25 
 					},
 					{
+						id: 22,
 						image: 'https://img.grouponcdn.com/deal/4PPA1AkKhAzaRbnnAZoG/Zv-440x267/v1/t300x182.jpg',
-						description: 'Up to 56% off botox or juvederm injections',
+						title: 'Up to 56% off botox or juvederm injections',
 						company: 'The Natural Place',
 						location: 'North Centeral Westminster',
 						hours: 48,
@@ -89,8 +91,9 @@
 						markdown: 99 
 					},
 					{
+						id: 333,
 						image: 'https://img.grouponcdn.com/deal/4PPA1AkKhAzaRbnnAZoG/Zv-440x267/v1/t300x182.jpg',
-						description: 'Up to 51% off a 10-lap race at Action Karting',
+						title: 'Up to 51% off a 10-lap race at Action Karting',
 						company: 'Action Karting',
 						location: 'Northeast Jefferson',
 						hours: 2,
@@ -98,8 +101,9 @@
 						markdown: 39 
 					},
 					{
+						id: 4444,
 						image: 'https://img.grouponcdn.com/deal/4PPA1AkKhAzaRbnnAZoG/Zv-440x267/v1/t300x182.jpg',
-						description: 'Up to 79% off at Darque Tan',
+						title: 'Up to 79% off at Darque Tan',
 						company: 'Darque Tan',
 						location: 'Multiple Locations',
 						hours: 18,
@@ -107,8 +111,9 @@
 						markdown: 25 
 					},
 					{
+						id: 55555,
 						image: 'https://img.grouponcdn.com/deal/4PPA1AkKhAzaRbnnAZoG/Zv-440x267/v1/t300x182.jpg',
-						description: 'Up to 56% off botox or juvederm injections',
+						title: 'Up to 56% off botox or juvederm injections',
 						company: 'The Natural Place',
 						location: 'North Centeral Westminster',
 						hours: 48,
@@ -116,8 +121,9 @@
 						markdown: 99 
 					},
 					{
+						id: 666666,
 						image: 'https://img.grouponcdn.com/deal/4PPA1AkKhAzaRbnnAZoG/Zv-440x267/v1/t300x182.jpg',
-						description: 'Up to 51% off a 10-lap race at Action Karting',
+						title: 'Up to 51% off a 10-lap race at Action Karting',
 						company: 'Action Karting',
 						location: 'Northeast Jefferson',
 						hours: 2,
@@ -133,7 +139,7 @@
 			$.get('templates/home.html',function(template) {
         			self.$el.html(_.template(template));
 			});
-			$.get('templates/promolist.html',function(template) {
+			$.get('templates/homelist.html',function(template) {
         			self.$el.append(_.template(template, {promotions: self.promotions}));
 			});
 
@@ -172,14 +178,134 @@
     	});
 
 	var PromotionlistView = Backbone.View.extend({
+		el: '.page',
+      		events: {
+        		'click #new': 'newPromotion',
+        		'click .share': 'sharePromotion',
+        		'click .view': 'viewPromotion',
+        		'click .copy': 'copyPromotion'
+      		},
+		newPromotion: function(e) {
+			router.navigate('#new', {trigger:true});
+		},
+		sharePromotion: function(e) {
+		},
+		viewPromotion: function(e) {
+			var id = $(e.currentTarget).attr('data-id');
+			router.navigate('#view/'+id, {trigger:true});
+		},
+		copyPromotion: function(e) {
+		},
+		render: function(options) {
+			var self = this;
+			self.promotions = [
+				{
+					id: 1,
+					image: 'https://img.grouponcdn.com/deal/4PPA1AkKhAzaRbnnAZoG/Zv-440x267/v1/t300x182.jpg',
+					title: 'Up to 79% off at Darque Tan',
+					network: 'Facebook',
+					company: 'Darque Tan',
+					location: 'Multiple Locations',
+					hours: 18,
+					participants: 19,
+					price: 68,
+					markdown: 25 
+				},
+				{
+					id: 22,
+					image: 'https://img.grouponcdn.com/deal/4PPA1AkKhAzaRbnnAZoG/Zv-440x267/v1/t300x182.jpg',
+					network: 'Facebook',
+					title: 'Up to 56% off botox or juvederm injections',
+					company: 'The Natural Place',
+					location: 'North Centeral Westminster',
+					hours: 48,
+					participants: 519,
+					price: 200,
+					markdown: 99 
+				},
+				{
+					id: 333,
+					image: 'https://img.grouponcdn.com/deal/4PPA1AkKhAzaRbnnAZoG/Zv-440x267/v1/t300x182.jpg',
+					network: 'Twitter',
+					title: 'Up to 51% off a 10-lap race at Action Karting',
+					company: 'Action Karting',
+					location: 'Northeast Jefferson',
+					hours: 2,
+					participants: 59,
+					price:  80,
+					markdown: 39 
+				}
+			];
+	
+			$.get('templates/promotionlist.html',function(template) {
+				self.$el.html(_.template(template, {promotions: self.promotions}));
+			});
+		}
 	});
 
+	var PromotionviewView = Backbone.View.extend({
+		el: '.page',
+      		events: {
+        		'click .update': 'updatePromotion',
+      		},
+		updatePromotion: function(e) {
+			router.navigate('#view/'+id, {trigger:true});
+		},
+		render: function(options) {
+			var self = this;
+			self.promotions = {
+				1: {
+					id: 1,
+					image: 'https://img.grouponcdn.com/deal/4PPA1AkKhAzaRbnnAZoG/Zv-440x267/v1/t300x182.jpg',
+					title: 'Up to 79% off at Darque Tan',
+					network: 'Facebook',
+					company: 'Darque Tan',
+					location: 'Multiple Locations',
+					hours: 18,
+					participants: 19,
+					price: 68,
+					markdown: 25 
+				},
+				22: {
+					id: 22,
+					image: 'https://img.grouponcdn.com/deal/4PPA1AkKhAzaRbnnAZoG/Zv-440x267/v1/t300x182.jpg',
+					network: 'Facebook',
+					title: 'Up to 56% off botox or juvederm injections',
+					company: 'The Natural Place',
+					location: 'North Centeral Westminster',
+					hours: 48,
+					participants: 519,
+					price: 200,
+					markdown: 99 
+				},
+				33: {
+					id: 33, 
+					image: 'https://img.grouponcdn.com/deal/4PPA1AkKhAzaRbnnAZoG/Zv-440x267/v1/t300x182.jpg',
+					network: 'Twitter',
+					title: 'Up to 51% off a 10-lap race at Action Karting',
+					company: 'Action Karting',
+					location: 'Northeast Jefferson',
+					hours: 2,
+					participants: 59,
+					price:  80,
+					markdown: 39 
+				}
+			};
+			self.promotion = self.promotions[options.id];
+	
+			$.get('templates/promotionview.html',function(template) {
+			debugger;
+				self.$el.html(_.template(template, {promotions: self.promotion}));
+			});
+		}
+	});
 	/********************/
 	/*****Definitions****/
 	/********************/
 	var homeView = new HomeView();
     	var promotionView = new PromotionView();
     	var promotionlistView = new PromotionlistView();
+    	var promotionviewView = new PromotionviewView();
 
 	/********************/
 	/*******ROUTER*******/
@@ -187,15 +313,17 @@
     	var Router = Backbone.Router.extend({
         	routes: {
           		"": "home", 
-          		"edit/:id": "promotion",
+          		"copy/:id": "promotion",
           		"new": "promotion",
-          		"active": "promotionlist",
+          		"list": "promotionlist",
+          		"view/:id": "promotionview",
         	}
     	});
     	var router = new Router;
 	router.on('route:home', 		function() { homeView.render(); })
   	router.on('route:promotion', 		function(id) { promotionView.render({id: id}); })
   	router.on('route:promotionlist', 	function(id) { promotionlistView.render(); })
+  	router.on('route:promotionview', 	function(id) { promotionviewView.render({id: id}); })
 
     	Backbone.history.start();
 </script>

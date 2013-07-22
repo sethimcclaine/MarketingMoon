@@ -1,0 +1,41 @@
+<div id="listPage">
+	<legend>Active<button type="button" id="new" class="btn-red">New Promotion</button></legend>
+		<% _.each(promotions, function(promotion) { %>
+			<div class="active promotion">
+				<div class="active info">
+					<div class="time"><span class="font-green">Time Remaining:</span> <span class="font-blue"><%= htmlEncode(promotion.hours) %></span></div>	
+					<div class="network"><span class="font-green">Network:</span> <span class="font-blue"><%= htmlEncode(promotion.network) %></span></div>	
+					<div class="participants"><span class="font-green">Participants:</span> <span class="font-blue"><%= htmlEncode(promotion.participants) %></span></div>	
+					<div class="title"><%= htmlEncode(promotion.title) %></div>
+					<div class="description"><%= htmlEncode(promotion.description) %></div>
+				</div>
+				<div class="active actions">
+					<div><button type="button" class="active share btn-blue" data-id="<%= htmlEncode(promotion.id) %>">Share</button></div>
+					<div><button type="button" class="active view btn-grey" data-id="<%= htmlEncode(promotion.id) %>">View</button></div>
+					<div><button type="button" class="active copy btn-grey" data-id="<%= htmlEncode(promotion.id) %>">Copy</button></div>
+				</div>
+
+				
+			</div>
+		<% }); %>
+	<legend>Complete</legend>
+		<% _.each(promotions, function(promotion) { %>
+			<div class="complete promotion">
+				<div class="complete info">
+					<div class="time"><span class="font-green">Time Remaining:</span> <span class="font-blue"><%= htmlEncode(promotion.hours) %></span></div>	
+					<div class="network"><span class="font-green">Network:</span> <span class="font-blue"><%= htmlEncode(promotion.network) %></span></div>	
+					<div class="participants"><span class="font-green">Participants:</span> <span class="font-blue"><%= htmlEncode(promotion.participants) %></span></div>	
+					<div class="title"><%= htmlEncode(promotion.title) %></div>
+					<div class="description"><%= htmlEncode(promotion.description) %></div>
+				</div>
+				<div class="complete actions">
+					<div><button type="button" class="complete view btn-grey" data-id="<%= htmlEncode(promotion.id) %>">View</button></div>
+					<div><button type="button" class="complete copy btn-grey" data-id="<%= htmlEncode(promotion.id) %>">Copy</button></div>
+				</div>
+
+				
+			</div>
+		<% }); %>
+
+</div>
+

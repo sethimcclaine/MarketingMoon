@@ -1,0 +1,17 @@
+<div id="viewPage">
+		<div class="active promotion">
+			<div class="active info">
+				<div class="time"><span class="font-green">Time Remaining:</span> <span class="font-blue"><%= htmlEncode(promotion.hours) %></span></div>	
+				<div class="network"><span class="font-green">Network:</span> <span class="font-blue"><%= htmlEncode(promotion.network) %></span></div>	
+				<div class="participants"><span class="font-green">Participants:</span> <span class="font-blue"><%= htmlEncode(promotion.participants) %></span></div>	
+				
+				<div class="title">Promotion Title:<%= htmlEncode(promotion.title) %></div>
+				<div class="description">Promotion Description: <%= htmlEncode(promotion.description) %></div>
+				<div class="description">Promotion Terms &amp; Conditions: <%= htmlEncode(promotion.terms) %></div>
+				<div class="description">Notes: <%= htmlEncode(promotion.notes) %></div>
+			</div>
+			<div class="img">
+				<img src=<%= htmlEncode(promotion.image) %>>
+			</div>
+		</div>
+</div>

@@ -1,62 +1,4 @@
-//Variables
-@yellow: #ffcc33;
-@blue: #3366ff;//blue;
-@grey: grey;
-@lgrey: lightgrey;
-@green: green; //#4D926F;
-//Globals
-input, textarea {
-	border-radius: .5em;
-	border: solid @grey .1em;
-}
-.navbar {
-	a {
-		font-weight: 200;
-		color: black;
-		margin-right: 2em;
-	}
-}
-.logo {
-	float: left;
-	width: 25%;
-	height: 5em;
-	.moon {
-		background-color: @yellow;
-		position: absolute; 
-		border-radius:2em;
-		height: 5em;
-		width: 5em;
-		.cresent{
-		      background-color: white;
-		      position: absolute; 
-		      border-radius:2em;
-		      top: .25em;
-		      left: 1em;
-		      height: 4.5em;
-		      width: 4.5em;
-		}
-	}
-	.marketing-moon{
-		position: relative;
-		top: 2.5em;
-		left: 1em;
-		color: @blue;
-		.marketing-text {
-			font-size: 1.5em;
-			.big-m{
-				font-weight: bold;
-				font-size: 2.5em;
-			}
-		}
-		.moon-text {
-			font-size: 1em;
-			.big-m{
-				font-weight: bold;
-				font-size: 2em;
-			}
-		}
-	}
-}
+@import 'variables.less';
 //Homepage
 	.promotions-count {
 		position: relative;
@@ -173,5 +115,56 @@ input, textarea {
 	legend { 
 		text-align: center;
 		color: @green;
+	}
+}
+//listPage
+#listPage {
+	legend {
+		width: 100%;
+		text-align: center;
+		#new {
+			float: right;
+			margin-left: -1em;
+			margin-right: 1em;
+		}
+	}
+	.promotion {
+		float: none; //unset
+		width: auto; //unset
+		height: auto;//unset
+		min-height: 10em;
+		border: solid @grey .1em;
+		border-radius: 2em;
+		margin: 1em;
+		.info {
+			margin-top: .5em;
+			float: left;
+			width: 90%;
+			.time, .network, .participants {
+				float: left;
+				width: 33%;
+				font-size: 1.5em;
+				line-height: 1em;
+				font-weight: 200;
+			}
+			.title, .description {
+				width: 100%;
+			}
+		}
+		.actions {
+			margin-top: .5em;
+			float: right;
+			text-align: right;
+			button {
+				width: 5em;
+				margin-bottom: .5em;
+				&.btn-blue {
+					margin-bottom: 2.5em;
+				}
+			}
+			&.complete {
+				margin-top: 5em;
+			}
+		}
 	}
 }
