@@ -20,19 +20,20 @@ RecessConf::$mode = RecessConf::DEVELOPMENT;
 
 RecessConf::$applications 
 	= array(	'recess.apps.tools.RecessToolsApplication',
-				'welcome.WelcomeApplication',
+				//'welcome.WelcomeApplication',//remove the welcomeapplication
+				'mMAPI.MMAPIApplication',
 			);
 
 RecessConf::$defaultTimeZone = 'America/New_York';
 
 RecessConf::$defaultDatabase
 	= array(	//'sqlite:' . $_ENV['dir.bootstrap'] . 'data/sqlite/default.db'
-				'mysql:host=localhost;dbname=DBNAME', 'USER', 'PASS'
+				'mysql:host=localhost;dbname=marketingmoon', 'root', ''
 			);
 
 RecessConf::$namedDatabases
 	= array( 	// 'nameFoo' => array('sqlite:' . $_ENV['dir.bootstrap'] . 'data/sqlite/default.db')
-				 'nameBar' => array('mysql:host=localhost;dbname=recess', 'username', 'password')
+				 'nameBar' => array('mysql:host=localhost;dbname=recess', 'root', '')
 			);
 
 // Paths to the recess, plugins, and apps directories
