@@ -132,6 +132,11 @@
 					},
 				];
 
+			$.ajax({
+				url: "/rest/api/promotion.json",
+			}).done(function(promotions) {
+				self.promotions = promotions;
+			});
 			$.get('templates/count.html', function(template) {
         			$('.pre-navbar').html( _.template(template, {promoCount: self.promotions.length}));
 			});
