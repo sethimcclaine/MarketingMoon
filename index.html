@@ -83,7 +83,8 @@
 				});
 				//promotion list but home view
 				$.get('templates/homelist.html',function(template) {
-					self.$el.append(_.template(template, {promotions: self.promotions}));
+					var now = $.now();
+					self.$el.append(_.template(template, {promotions: self.promotions, now: now}));
 				});
 
 			});

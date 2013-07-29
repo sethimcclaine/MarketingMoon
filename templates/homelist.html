@@ -7,13 +7,13 @@
 		</div>
 		<div class="promo-desc">
 			<div class="promo-title"><%= htmlEncode(promotion.Description) %></div>
-			<div class="promo-company"><%= htmlEncode(promotion.Company) %></div>
+			<div class="promo-company"><%= htmlEncode(promotion.Business) %></div>
 			<div class="promo-location"><%= htmlEncode(promotion.Address) %></div>
 			<div class="promo-price">
-				<span class="origional">$<%= htmlEncode(promotion.Price) %></span>
+				<span class="origional">$<%= htmlEncode(promotion.Value) %></span>
 				<span class="markdown">$<%= htmlEncode(promotion.Markdown) %></span>
 			</div>
-			<div class="promo-end">Ends: <%= htmlEncode(promotion.End) %> Hours</div>
+			<div class="promo-end">Ends: <%= htmlEncode(Math.floor(((promotion.End*1000)-now)/3600000)) %> Hours</div>
 		</div>
 	</div>
 <% }); %>
