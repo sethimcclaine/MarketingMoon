@@ -68,86 +68,23 @@
 		template: _.template('template/home.html'),
       		render: function () {
         		var self = this;
-			//var promoCount = promotion.models.length;
-			self.promotions = [
-					{
-						id: 1,
-						image: 'https://img.grouponcdn.com/deal/4PPA1AkKhAzaRbnnAZoG/Zv-440x267/v1/t300x182.jpg',
-						title: 'Up to 79% off at Darque Tan',
-						company: 'Darque Tan',
-						location: 'Multiple Locations',
-						hours: 18,
-						price: 68,
-						markdown: 25 
-					},
-					{
-						id: 22,
-						image: 'https://img.grouponcdn.com/deal/4PPA1AkKhAzaRbnnAZoG/Zv-440x267/v1/t300x182.jpg',
-						title: 'Up to 56% off botox or juvederm injections',
-						company: 'The Natural Place',
-						location: 'North Centeral Westminster',
-						hours: 48,
-						price: 200,
-						markdown: 99 
-					},
-					{
-						id: 333,
-						image: 'https://img.grouponcdn.com/deal/4PPA1AkKhAzaRbnnAZoG/Zv-440x267/v1/t300x182.jpg',
-						title: 'Up to 51% off a 10-lap race at Action Karting',
-						company: 'Action Karting',
-						location: 'Northeast Jefferson',
-						hours: 2,
-						price:  80,
-						markdown: 39 
-					},
-					{
-						id: 4444,
-						image: 'https://img.grouponcdn.com/deal/4PPA1AkKhAzaRbnnAZoG/Zv-440x267/v1/t300x182.jpg',
-						title: 'Up to 79% off at Darque Tan',
-						company: 'Darque Tan',
-						location: 'Multiple Locations',
-						hours: 18,
-						price: 68,
-						markdown: 25 
-					},
-					{
-						id: 55555,
-						image: 'https://img.grouponcdn.com/deal/4PPA1AkKhAzaRbnnAZoG/Zv-440x267/v1/t300x182.jpg',
-						title: 'Up to 56% off botox or juvederm injections',
-						company: 'The Natural Place',
-						location: 'North Centeral Westminster',
-						hours: 48,
-						price: 200,
-						markdown: 99 
-					},
-					{
-						id: 666666,
-						image: 'https://img.grouponcdn.com/deal/4PPA1AkKhAzaRbnnAZoG/Zv-440x267/v1/t300x182.jpg',
-						title: 'Up to 51% off a 10-lap race at Action Karting',
-						company: 'Action Karting',
-						location: 'Northeast Jefferson',
-						hours: 2,
-						price:  80,
-						markdown: 39 
-					},
-				];
-
 			$.ajax({
 				url: "/rest/api/promotion.json",
-			}).done(function(promotions) {
+			}).success(function(promotions) {
 				self.promotions = promotions;
-			});
-			$.get('templates/count.html', function(template) {
-        			$('.pre-navbar').html( _.template(template, {promoCount: self.promotions.length}));
-			});
+			}).done(function() {
+				$.get('templates/count.html', function(template) {
+					$('.pre-navbar').html( _.template(template, {promoCount: self.promotions.length}));
+				});
 
-			$.get('templates/home.html',function(template) {
-        			self.$el.html(_.template(template));
-			});
-			$.get('templates/homelist.html',function(template) {
-        			self.$el.append(_.template(template, {promotions: self.promotions}));
-			});
+				$.get('templates/home.html',function(template) {
+					self.$el.html(_.template(template));
+				});
+				$.get('templates/homelist.html',function(template) {
+					self.$el.append(_.template(template, {promotions: self.promotions}));
+				});
 
+			});
       		}
     	});
 
