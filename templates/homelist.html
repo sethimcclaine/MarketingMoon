@@ -3,17 +3,17 @@
 		<div class="promo-img">
 			<button class="close-btn">X</button>
 			<button class="like-btn">&lt;3</button>
-			<img src="<%= htmlEncode(promotion.image) %>">
+			<img src="<%= htmlEncode(promotion.Image) %>">
 		</div>
 		<div class="promo-desc">
-			<div class="promo-title"><%= htmlEncode(promotion.description) %></div>
-			<div class="promo-company"><%= htmlEncode(promotion.company) %></div>
-			<div class="promo-location"><%= htmlEncode(promotion.location) %></div>
+			<div class="promo-title"><%= htmlEncode(promotion.Description) %></div>
+			<div class="promo-company"><%= htmlEncode(promotion.Company) %></div>
+			<div class="promo-location"><%= htmlEncode(promotion.Address) %></div>
 			<div class="promo-price">
-				<span class="origional">$<%= htmlEncode(promotion.price) %></span>
-				<span class="markdown">$<%= htmlEncode(promotion.markdown) %></span>
+				<span class="origional">$<%= htmlEncode(promotion.Price) %></span>
+				<span class="markdown">$<%= htmlEncode(promotion.Markdown) %></span>
 			</div>
-			<div class="promo-end">Ends: <%= htmlEncode(promotion.hours) %> Hours</div>
+			<div class="promo-end">Ends: <%= htmlEncode(promotion.End) %> Hours</div>
 		</div>
 	</div>
 <% }); %>

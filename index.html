@@ -73,13 +73,15 @@
 			}).success(function(promotions) {
 				self.promotions = promotions;
 			}).done(function() {
+				//Current Count
 				$.get('templates/count.html', function(template) {
 					$('.pre-navbar').html( _.template(template, {promoCount: self.promotions.length}));
 				});
-
+				//Header and all
 				$.get('templates/home.html',function(template) {
 					self.$el.html(_.template(template));
 				});
+				//promotion list but home view
 				$.get('templates/homelist.html',function(template) {
 					self.$el.append(_.template(template, {promotions: self.promotions}));
 				});
